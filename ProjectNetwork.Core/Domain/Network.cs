@@ -5,6 +5,7 @@ namespace ProjectNetwork.Core.Domain
     public class Network
     {
         private int[] _elements;
+        private int[] _level;
 
         public Network(int number_of_elements)
         {
@@ -12,11 +13,19 @@ namespace ProjectNetwork.Core.Domain
                 throw new ArgumentException("O número de elementos deve ser positivo.");
 
             _elements = new int[number_of_elements];
+            _level = new int[number_of_elements];
 
             for (int i = 0; i < number_of_elements; i++)
             {
                 _elements[i] = i;
+                _level[i] = 0;
             }
+        }
+
+        private void ValidateIndex(int i)
+        {
+            if (i < 0 || i >= _elements.Length)
+                throw new IndexOutOfRangeException(string.Format("Índice inválido: {0}. Deve estar entre 0 e {1}.", i, _elements.Length - 1));
         }
     }
 }
