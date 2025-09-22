@@ -33,9 +33,9 @@ namespace ProjectNetwork.Core.Domain
             ValidateIndex(element);
 
             if (_elements[element] != element)
-                return Find(_elements[element]);
+                _elements[element] = Find(_elements[element]);
 
-            return element;
+            return _elements[element];
         }
 
         public void Connect(int elementA, int elementB)
