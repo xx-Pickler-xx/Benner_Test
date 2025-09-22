@@ -34,7 +34,27 @@ namespace ProjectNetwork.Core.Domain
 
             if (_elements[element] != element)
                 return Find(_elements[element]);
+
             return element;
+        }
+
+        public void Connect(int elementA, int elementB)
+        {
+            ValidateIndex(elementA);
+            ValidateIndex(elementB);
+
+            int representativeA = Find(elementA);
+            int representativeB = Find(elementB);
+
+            _elements[representativeB] = representativeA;
+        }
+
+        public bool Query(int elementA, int elementB)
+        {
+            ValidateIndex(elementA);
+            ValidateIndex(elementB);
+
+            return Find(elementA) == Find(elementB);
         }
     }
 }
