@@ -40,13 +40,25 @@ namespace ProjectNetwork.Core.Domain
 
         public void Connect(int elementA, int elementB)
         {
-            ValidateIndex(elementA);
-            ValidateIndex(elementB);
-
             int representativeA = Find(elementA);
             int representativeB = Find(elementB);
 
-            _elements[representativeB] = representativeA;
+            if (representativeA != representativeB)
+            {
+                if (_level[representativeA] < _level[representativeB])
+                {
+                    _elements[representativeA] = representativeB;
+                }
+                else if (_level[representativeA] > _level[representativeB])
+                {
+                    _elements[representativeB] = representativeA;
+                }
+                else
+                {
+                    _elements[representativeB] = representativeA;
+                    _level[representativeA]++;
+                }
+            }
         }
 
         public bool Query(int elementA, int elementB)
