@@ -27,5 +27,14 @@ namespace ProjectNetwork.Core.Domain
             if (i < 0 || i >= _elements.Length)
                 throw new IndexOutOfRangeException(string.Format("Índice inválido: {0}. Deve estar entre 0 e {1}.", i, _elements.Length - 1));
         }
+
+        private int Find(int element)
+        {
+            ValidateIndex(element);
+
+            if (_elements[element] != element)
+                return Find(_elements[element]);
+            return element;
+        }
     }
 }
